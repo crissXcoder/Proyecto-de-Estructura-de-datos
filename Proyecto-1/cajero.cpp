@@ -1,23 +1,49 @@
 #include "cajero.h"
+#include <limits>
 
 Cajero::Cajero() : primero(NULL), ultimo(NULL), totalCajeros(0) {}
 
 Cajero::~Cajero() {
-    NodoCajero* actual = primero;
-    while (actual != NULL) {
-        NodoCajero* siguiente = actual->siguiente;
-        delete actual;
-        actual = siguiente;
+    while (primero != NULL) {
+        NodoCajero* temp = primero;
+        primero = primero->siguiente;
+        delete temp;
     }
 }
 
-void Cajero::ingresar(int id, int numeroCaja, string nombre) {
-    if (totalCajeros >= 6) {
+bool Cajero::existeCajero(int id) const {
+    NodoCajero* actual = primero;
+    while (actual != NULL) {
+        if (actual->id == id) return true;
+        actual = actual->siguiente;
+    }
+    return false;
+}
+
+bool Cajero::existeNumeroCaja(int numeroCaja) const {
+    NodoCajero* actual = primero;
+    while (actual != NULL) {
+        if (actual->numeroCaja == numeroCaja) return true;
+        actual = actual->siguiente;
+    }
+    return false;
+}
+
+bool Cajero::ingresar(int id, int numeroCaja, const string& nombre, const string& apellido, const string& correo) {
+    if (totalCajeros >= MAX_CAJEROS) {
         cout << "Error: No se pueden agregar más cajeros. Límite alcanzado.\n";
-        return;
+        return false;
+    }
+    if (existeCajero(id)) {
+        cout << "Error: Ya existe un cajero con ese ID.\n";
+        return false;
+    }
+    if (existeNumeroCaja(numeroCaja)) {
+        cout << "Error: Ya existe un cajero con ese número de caja.\n";
+        return false;
     }
 
-    NodoCajero* nuevo = new NodoCajero(id, numeroCaja, nombre);
+    NodoCajero* nuevo = new NodoCajero(id, numeroCaja, nombre, apellido, correo);
 
     if (primero == NULL) {
         primero = ultimo = nuevo;
@@ -30,15 +56,54 @@ void Cajero::ingresar(int id, int numeroCaja, string nombre) {
 
     totalCajeros++;
     cout << "Cajero ingresado exitosamente.\n";
+    return true;
 }
 
-void Cajero::mostrar(int id) {
+void Cajero::mostrarListaCajero() {
+    if (estaVacia()) {
+        cout << "La lista de cajeros está vacía.\n";
+        return;
+    }
+
+    cout << "------------------------------------ Lista de Cajeros ------------------------------------\n";
+    cout << left
+        << setw(5) << "ID" << "| "
+        << setw(10) << "CAJA" << "| "
+        << setw(15) << "NOMBRE" << "| "
+        << setw(15) << "APELLIDO" << "| "
+        << setw(25) << "CORREO" << "| "
+        << setw(10) << "CLIENTES" << endl;
+    cout << "----------------------------------------------------------------------------------------\n";
+
+    NodoCajero* actual = primero;
+    while (actual != NULL) {
+        cout << left
+            << setw(5) << actual->id << "| "
+            << setw(10) << actual->numeroCaja << "| "
+            << setw(15) << actual->nombre << "| "
+            << setw(15) << actual->apellido << "| "
+            << setw(25) << actual->correo << "| "
+            << setw(10) << actual->clientesEnCola << endl;
+        actual = actual->siguiente;
+    }
+    cout << "----------------------------------------------------------------------------------------\n";
+    cout << "Cantidad total de cajeros: " << totalCajeros << endl;
+}
+
+void Cajero::mostrar(int id) const {
+    if (estaVacia()) {
+        cout << "La lista de cajeros está vacía.\n";
+        return;
+    }
+
     NodoCajero* actual = primero;
     while (actual != NULL) {
         if (actual->id == id) {
             cout << "ID: " << actual->id << "\n";
             cout << "Número de Caja: " << actual->numeroCaja << "\n";
             cout << "Nombre: " << actual->nombre << "\n";
+            cout << "Apellido: " << actual->apellido << "\n";
+            cout << "Correo: " << actual->correo << "\n";
             cout << "Clientes en cola: " << actual->clientesEnCola << "\n";
             return;
         }
@@ -47,26 +112,39 @@ void Cajero::mostrar(int id) {
     cout << "Cajero no encontrado.\n";
 }
 
-void Cajero::modificar(int id, string nuevoNombre) {
+bool Cajero::modificar(int id, const string& nuevoNombre, const string& nuevoApellido, const string& nuevoCorreo) {
+    if (estaVacia()) {
+        cout << "La lista de cajeros está vacía.\n";
+        return false;
+    }
+
     NodoCajero* actual = primero;
     while (actual != NULL) {
         if (actual->id == id) {
             actual->nombre = nuevoNombre;
+            actual->apellido = nuevoApellido;
+            actual->correo = nuevoCorreo;
             cout << "Datos del cajero modificados exitosamente.\n";
-            return;
+            return true;
         }
         actual = actual->siguiente;
     }
     cout << "Cajero no encontrado.\n";
+    return false;
 }
 
-void Cajero::eliminar(int id) {
+bool Cajero::eliminar(int id) {
+    if (estaVacia()) {
+        cout << "La lista de cajeros está vacía.\n";
+        return false;
+    }
+
     NodoCajero* actual = primero;
     while (actual != NULL) {
         if (actual->id == id) {
             if (actual->clientesEnCola > 0) {
                 cout << "No se puede eliminar el cajero. Tiene clientes pendientes.\n";
-                return;
+                return false;
             }
 
             if (actual == primero) {
@@ -85,14 +163,20 @@ void Cajero::eliminar(int id) {
             delete actual;
             totalCajeros--;
             cout << "Cajero eliminado exitosamente.\n";
-            return;
+            return true;
         }
         actual = actual->siguiente;
     }
     cout << "Cajero no encontrado.\n";
+    return false;
 }
 
-void Cajero::mostrarTodos() {
+void Cajero::mostrarTodos() const {
+    if (estaVacia()) {
+        cout << "La lista de cajeros está vacía.\n";
+        return;
+    }
+
     NodoCajero* actual = primero;
     while (actual != NULL) {
         cout << "ID: " << actual->id << ", Caja: " << actual->numeroCaja
@@ -101,8 +185,25 @@ void Cajero::mostrarTodos() {
     }
 }
 
+
+NodoCajero* Cajero::buscarCajeroParaAdultoMayor() {
+    NodoCajero* cajeroElegido = NULL;
+    int menorCantidadClientes = INT_MAX;
+
+    NodoCajero* actual = primero;
+    while (actual != NULL) {
+        if (actual->clientesEnCola < menorCantidadClientes) {
+            menorCantidadClientes = actual->clientesEnCola;
+            cajeroElegido = actual;
+        }
+        actual = actual->siguiente;
+    }
+
+    return cajeroElegido;
+}
+
 NodoCajero* Cajero::buscarCajeroMenosClientes() {
-    if (primero == NULL) return NULL;
+    if (estaVacia()) return NULL;
 
     NodoCajero* menorCola = primero;
     NodoCajero* actual = primero->siguiente;
@@ -118,7 +219,45 @@ NodoCajero* Cajero::buscarCajeroMenosClientes() {
 }
 
 NodoCajero* Cajero::buscarPrimerCajeroDisponible() {
-    return primero;  // Simplemente retorna el primer cajero
+    NodoCajero* actual = primero;
+    while (actual != NULL) {
+        if (actual->clientesEnCola < 5) { // Asumimos que un cajero está disponible si tiene menos de 5 clientes
+            return actual;
+        }
+        actual = actual->siguiente;
+    }
+    return NULL; // No hay cajeros disponibles
+}
+
+NodoCajero* Cajero::buscarCajeroAleatorioDisponible() {
+    int cajerosDisponibles = 0;
+    NodoCajero* actual = primero;
+    while (actual != NULL) {
+        if (actual->clientesEnCola < 5) {
+            cajerosDisponibles++;
+        }
+        actual = actual->siguiente;
+    }
+
+    if (cajerosDisponibles == 0) {
+        return NULL; // No hay cajeros disponibles
+    }
+
+    int cajeroSeleccionado = rand() % cajerosDisponibles + 1;
+    actual = primero;
+    int contador = 0;
+
+    while (actual != NULL) {
+        if (actual->clientesEnCola < 5) {
+            contador++;
+            if (contador == cajeroSeleccionado) {
+                return actual;
+            }
+        }
+        actual = actual->siguiente;
+    }
+
+    return NULL; // No debería llegar aquí, pero por si acaso
 }
 
 void Cajero::incrementarClientes(int numeroCaja) {
