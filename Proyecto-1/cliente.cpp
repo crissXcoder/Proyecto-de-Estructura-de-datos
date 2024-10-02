@@ -3,50 +3,56 @@
 #include <iomanip>
 #include <ctime>
 #include <sstream>
+#include <cstdlib>
 
 Cliente::Cliente() : primero(NULL), consecutivoC(1), consecutivoA(1) {}
 
 Cliente::~Cliente() {
-    NodoCliente* actual = primero;
-    while (actual != NULL) {
-        NodoCliente* siguiente = actual->siguiente;
-        delete actual;
-        actual = siguiente;
+    while (primero != NULL) {
+        NodoCliente* temp = primero;
+        primero = primero->siguiente;
+        delete temp;
     }
 }
 
-void Cliente::ingresar(int edad, Cajero& cajeros) {
+bool Cliente::ingresar(int edad, Cajero& cajeros, const string& nombre, const string& apellido, const string& telefono, const string& correo, const string& direccion) {
     string ficha;
     int cajeroAsignado;
 
+    // Validación de datos
+    if (edad <= 0 || nombre.empty() || apellido.empty() || telefono.empty() || correo.empty() || direccion.empty()) {
+        cout << "Error: Todos los campos son obligatorios y la edad debe ser un número positivo.\n";
+        return false;
+    }
+
     if (edad >= 65) {
         ficha = "A" + to_string(consecutivoA++);
-        NodoCajero* cajero = cajeros.buscarPrimerCajeroDisponible();
-        if (cajero == NULL) {
+        NodoCajero* cajeroElegido = cajeros.buscarCajeroParaAdultoMayor();
+        if (cajeroElegido == NULL) {
             cout << "No hay cajeros disponibles.\n";
-            return;
+            return false;
         }
-        cajeroAsignado = cajero->numeroCaja;
+        cajeroAsignado = cajeroElegido->numeroCaja;
     }
     else {
         ficha = "C" + to_string(consecutivoC++);
         NodoCajero* cajero = cajeros.buscarCajeroMenosClientes();
         if (cajero == NULL) {
             cout << "No hay cajeros disponibles.\n";
-            return;
+            return false;
         }
         cajeroAsignado = cajero->numeroCaja;
     }
 
-    NodoCliente* nuevo = new NodoCliente(ficha, edad, cajeroAsignado);
+    NodoCliente* nuevo = new NodoCliente(ficha, edad, cajeroAsignado, nombre, apellido, telefono, correo, direccion);
 
-    if (primero == NULL || ficha[0] == 'A') {
+    if (primero == NULL || (ficha[0] == 'A' && (primero->ficha[0] != 'A' || primero->cajeroAsignado != cajeroAsignado))) {
         nuevo->siguiente = primero;
         primero = nuevo;
-    }
-    else {
+    } else {
         NodoCliente* actual = primero;
-        while (actual->siguiente != NULL && actual->siguiente->ficha[0] != 'A') {
+        while (actual->siguiente != NULL && 
+               (actual->siguiente->ficha[0] == 'A' || actual->siguiente->cajeroAsignado != cajeroAsignado)) {
             actual = actual->siguiente;
         }
         nuevo->siguiente = actual->siguiente;
@@ -55,12 +61,13 @@ void Cliente::ingresar(int edad, Cajero& cajeros) {
 
     cajeros.incrementarClientes(cajeroAsignado);
     cout << "Cliente ingresado con ficha: " << ficha << " y asignado al cajero: " << cajeroAsignado << "\n";
+    return true;
 }
 
-void Cliente::eliminar(string ficha) {
-    if (primero == NULL) {
+bool Cliente::eliminar(const string& ficha) {
+    if (estaVacia()) {
         cout << "No hay clientes en la cola.\n";
-        return;
+        return false;
     }
 
     if (primero->ficha == ficha) {
@@ -68,7 +75,7 @@ void Cliente::eliminar(string ficha) {
         primero = primero->siguiente;
         delete temp;
         cout << "Cliente con ficha " << ficha << " eliminado.\n";
-        return;
+        return true;
     }
 
     NodoCliente* actual = primero;
@@ -81,34 +88,55 @@ void Cliente::eliminar(string ficha) {
         actual->siguiente = temp->siguiente;
         delete temp;
         cout << "Cliente con ficha " << ficha << " eliminado.\n";
+        return true;
     }
     else {
         cout << "Cliente con ficha " << ficha << " no encontrado.\n";
+        return false;
     }
 }
 
 void Cliente::atenderClientes(Cajero& cajeros) {
+    if (estaVacia()) {
+        cout << "No hay clientes para atender.\n";
+        return;
+    }
+
     cout << "Estado antes de atender:\n";
     mostrarTodos();
     cajeros.mostrarTodos();
 
-    NodoCliente* actual = primero;
-    NodoCliente* anterior = NULL;
+    NodoCajero* cajeroActual = cajeros.obtenerPrimerCajero();
+    while (cajeroActual != NULL) {
+        NodoCliente* clienteAtendido = NULL;
+        NodoCliente* anterior = NULL;
+        NodoCliente* actual = primero;
 
-    while (actual != NULL) {
-        cout << "Atendiendo cliente con ficha: " << actual->ficha << " en caja: " << actual->cajeroAsignado << "\n";
-        cajeros.decrementarClientes(actual->cajeroAsignado);
-
-        if (anterior == NULL) {
-            primero = actual->siguiente;
+        while (actual != NULL) {
+            if (actual->cajeroAsignado == cajeroActual->numeroCaja) {
+                clienteAtendido = actual;
+                break;
+            }
+            anterior = actual;
+            actual = actual->siguiente;
         }
-        else {
-            anterior->siguiente = actual->siguiente;
+
+        if (clienteAtendido != NULL) {
+            cout << "Atendiendo cliente con ficha: " << clienteAtendido->ficha
+                << " en caja: " << clienteAtendido->cajeroAsignado << "\n";
+
+            if (anterior == NULL) {
+                primero = clienteAtendido->siguiente;
+            }
+            else {
+                anterior->siguiente = clienteAtendido->siguiente;
+            }
+
+            cajeros.decrementarClientes(clienteAtendido->cajeroAsignado);
+            delete clienteAtendido;
         }
 
-        NodoCliente* temp = actual;
-        actual = actual->siguiente;
-        delete temp;
+        cajeroActual = cajeroActual->siguiente;
     }
 
     cout << "Estado después de atender:\n";
@@ -116,21 +144,37 @@ void Cliente::atenderClientes(Cajero& cajeros) {
     cajeros.mostrarTodos();
 }
 
-void Cliente::mostrarTodos() {
-    NodoCliente* actual = primero;
-    while (actual != NULL) {
-        char buffer[26];
-        struct tm timeinfo;
-        localtime_s(&timeinfo, &actual->fecha);
-        asctime_s(buffer, sizeof(buffer), &timeinfo);
-
-        // Eliminar el salto de línea al final de buffer
-        buffer[24] = '\0';
-
-        cout << "Ficha: " << actual->ficha
-            << ", Edad: " << actual->edad
-            << ", Fecha: " << buffer
-            << ", Cajero: " << actual->cajeroAsignado << "\n";
-        actual = actual->siguiente;
+void Cliente::mostrarTodos() const {
+    if (estaVacia()) {
+        cout << "No hay clientes en la cola.\n";
+        return;
     }
+
+    cout << "------------------------------------ Lista de Clientes ------------------------------------\n";
+    cout << left
+        << setw(10) << "FICHA" << "| "
+        << setw(15) << "NOMBRE" << "| "
+        << setw(15) << "APELLIDO" << "| "
+        << setw(10) << "TELÉFONO" << "| "
+        << setw(25) << "CORREO" << "| "
+        << setw(10) << "CAJERO" << "| "
+        << setw(20) << "DIRECCIÓN" << endl;
+    cout << "------------------------------------------------------------------------------------------\n";
+
+    NodoCliente* actual = primero;
+    int totalClientes = 0;
+    while (actual != NULL) {
+        cout << left
+            << setw(10) << actual->ficha << "| "
+            << setw(15) << actual->nombre << "| "
+            << setw(15) << actual->apellido << "| "
+            << setw(10) << actual->telefono << "| "
+            << setw(25) << actual->correo << "| "
+            << setw(10) << actual->cajeroAsignado << "| "
+            << setw(20) << actual->direccion << endl;
+        actual = actual->siguiente;
+        totalClientes++;
+    }
+    cout << "------------------------------------------------------------------------------------------\n";
+    cout << "Cantidad total de clientes: " << totalClientes << endl;
 }

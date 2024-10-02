@@ -7,20 +7,20 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Proyecto-1\\Proyecto-1.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cajero.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Proyecto-1\\cajero.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cliente.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Proyecto-1\\cliente.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cajero.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Proyecto-1\\cajero.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cliente.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Proyecto-1\\cliente.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cajero.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Proyecto-1\\cajero.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cliente.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Proyecto-1\\cliente.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,8 +30,22 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Proyecto-1.cpp",
+              "DocumentMoniker": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\Proyecto-1.cpp",
+              "RelativeDocumentMoniker": "Proyecto-1\\Proyecto-1.cpp",
+              "ToolTip": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\Proyecto-1.cpp",
+              "RelativeToolTip": "Proyecto-1\\Proyecto-1.cpp",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAowDYAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-29T05:17:16.858Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
@@ -42,39 +56,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Proyecto-1.cpp",
-              "DocumentMoniker": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\Proyecto-1.cpp",
-              "RelativeDocumentMoniker": "Proyecto-1\\Proyecto-1.cpp",
-              "ToolTip": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\Proyecto-1.cpp",
-              "RelativeToolTip": "Proyecto-1\\Proyecto-1.cpp",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAAQAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-29T05:17:16.858Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "cliente.cpp",
-              "DocumentMoniker": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cliente.cpp",
-              "RelativeDocumentMoniker": "Proyecto-1\\cliente.cpp",
-              "ToolTip": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cliente.cpp",
-              "RelativeToolTip": "Proyecto-1\\cliente.cpp",
-              "ViewState": "AgIAAHAAAAAAAAAAAAAAAIEAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-09-29T05:17:01.98Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "cajero.cpp",
               "DocumentMoniker": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cajero.cpp",
               "RelativeDocumentMoniker": "Proyecto-1\\cajero.cpp",
               "ToolTip": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cajero.cpp",
               "RelativeToolTip": "Proyecto-1\\cajero.cpp",
-              "ViewState": "AgIAAIAAAAAAAAAAAAAqwI8AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-09-29T05:16:40.559Z",
               "EditorCaption": ""
@@ -82,27 +70,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "cliente.h",
-              "DocumentMoniker": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cliente.h",
-              "RelativeDocumentMoniker": "Proyecto-1\\cliente.h",
-              "ToolTip": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cliente.h",
-              "RelativeToolTip": "Proyecto-1\\cliente.h",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAYwCgAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-09-29T05:15:57.939Z",
+              "Title": "cliente.cpp",
+              "DocumentMoniker": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cliente.cpp",
+              "RelativeDocumentMoniker": "Proyecto-1\\cliente.cpp",
+              "ToolTip": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cliente.cpp",
+              "RelativeToolTip": "Proyecto-1\\cliente.cpp",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAAAD8AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-29T05:17:01.98Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "cajero.h",
               "DocumentMoniker": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cajero.h",
               "RelativeDocumentMoniker": "Proyecto-1\\cajero.h",
               "ToolTip": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cajero.h",
               "RelativeToolTip": "Proyecto-1\\cajero.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-09-29T05:15:30.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "cliente.h",
+              "DocumentMoniker": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cliente.h",
+              "RelativeDocumentMoniker": "Proyecto-1\\cliente.h",
+              "ToolTip": "C:\\Users\\crisa\\Dev\u0027s\\Estructura de datos\\Repo-Proyecto\\Proyecto-de-Estructura-de-datos\\Proyecto-1\\cliente.h",
+              "RelativeToolTip": "Proyecto-1\\cliente.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-09-29T05:15:57.939Z",
               "EditorCaption": ""
             }
           ]
